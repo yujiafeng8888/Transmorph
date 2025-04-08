@@ -15,7 +15,7 @@ This tool converts a BAM file containing read alignments in genomic coordinates 
 
 ```python
 python3 main.py -g gtffile.gtf -i bamfile.bam -o output
-
+```
 ## Installation
 
 To use the tool, you can simply download the script or clone the repository, and then run the Python script.
