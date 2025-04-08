@@ -1,4 +1,6 @@
-# BAM to Transcriptomic Coordinates Converter
+# Transmorph
+
+### BAM to Transcriptomic Coordinates Converter
 
 This tool converts a BAM file containing read alignments in genomic coordinates into transcriptomic coordinates using a given transcript annotation file (GTF format).
 
