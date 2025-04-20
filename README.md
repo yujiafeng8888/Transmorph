@@ -1,8 +1,8 @@
 # Transmorph
 
-### BAM to Transcriptomic Coordinates Converter
+**Transmorph** is a lightweight Python tool to convert BAM files from genomic coordinates to transcriptomic coordinates using a provided transcript annotation file (GTF/GFF).
 
-This tool converts a BAM file containing read alignments in genomic coordinates into transcriptomic coordinates using a given transcript annotation file (GTF format).
+---
 
 ## Requirements
 
@@ -15,13 +15,32 @@ This tool converts a BAM file containing read alignments in genomic coordinates 
 - `-g` `--input-gtffile` input gtf file
 - `-o` `--output-filename` output bam file
 
+## Installation
+
+From GitHub:
+
+```bash
+pip install git+https://github.com/yujiafeng8888/Transmorph.git
 ```python
 python3 main.py -g gtffile.gtf -i bamfile.bam -o output
 ```
-## Installation
-
-To use the tool, you can simply download the script or clone the repository, and then run the Python script.
+Or clone and install locally:
 
 ```bash
 git clone https://github.com/yujiafeng8888/Transmorph.git
 cd Transmorph
+pip install .
+```
+
+## Usage
+
+After installation, you can run it via command line:
+```bash
+transmorph -i input.bam -g annotation.gtf -o output_transcript.bam
+
+```
+
+## Author
+
+Yujia Feng
+yfeng80@jh.edu
