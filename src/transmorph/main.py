@@ -1,8 +1,8 @@
-import gtf_utils as ul
+from transmorph import gtf_utils as ul
 import argparse
 import os
 import sys
-#TODO 后面可能加一个读取多个bam file的功能
+
 def main():
    
     parser = argparse.ArgumentParser(
@@ -30,8 +30,6 @@ def main():
     print("processing reads...")
     ul.process_reads(bam_file,args.output_filename,gtf_file)
     bam_file.close()
-    # transcripts, exons=ul.extract_transcripts_and_exons(gtf_file)
-    # print(transcripts)
     
 if __name__ == "__main__":
     main()
