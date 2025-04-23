@@ -1,0 +1,12 @@
+LICENSE
+README.md
+setup.py
+src/transmorph/__init__.py
+src/transmorph/gtf_utils.py
+src/transmorph/main.py
+src/transmorph.egg-info/PKG-INFO
+src/transmorph.egg-info/SOURCES.txt
+src/transmorph.egg-info/dependency_links.txt
+src/transmorph.egg-info/entry_points.txt
+src/transmorph.egg-info/requires.txt
+src/transmorph.egg-info/top_level.txt

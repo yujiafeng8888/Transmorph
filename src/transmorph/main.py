@@ -1,4 +1,4 @@
-from transmorph import gtf_utils as ul
+import gtf_utils as ul
 import argparse
 import os
 import sys
