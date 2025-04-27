@@ -52,7 +52,7 @@ def process_reads(bam_file,output_bamname,gtf):
         else:
             intron_list=check_cigar(read)
             # print(intron_list)
-            # genome_to_transcript_coords_skipintron(bam_file,read, exons,transcripts,out_bam,intron_list)
+            genome_to_transcript_coords_skipintron(bam_file,read, exons,transcripts,out_bam,intron_list)
     out_bam.close()
     print("process finished!")
 
@@ -129,12 +129,25 @@ def genome_to_transcript_coords(bam_file,read, exons, transcripts,out_bam):
 
     except ValueError as e:
         print(f"Skipping read {trans_id} name: {read.query_name} due to error: {e}")
+def remove_N_from_read(read):
+    if read.cigartuples is None:
+        return read
+    
+    new_cigar = []
+    for (op, length) in read.cigartuples:
+        if op == 3:
+            continue
+        new_cigar.append((op, length))
+    
+    read.cigartuples = new_cigar
+    return read
 
 def genome_to_transcript_coords_skipintron(bam_file,read, exons, transcripts,out_bam,intron_list):
     try:
         if not read or not hasattr(read, 'reference_start'):
             return None
         chrom_list=list(exons["seqname"])
+        reference_id = read.reference_id
         chrom = bam_file.get_reference_name(reference_id)
         if chrom not in chrom_list:
             print(chrom)
@@ -149,7 +162,7 @@ def genome_to_transcript_coords_skipintron(bam_file,read, exons, transcripts,out
         sub_transcript = transcripts[(transcripts["seqname"]==chrom)&(transcripts["start"] <= genome_start) & (transcripts["end"] >= next_genome_end)]
         sub_transcript_id=list(sub_transcript["transcript_id"])
         if sub_transcript_id is not None:
-            exon_chrom = exons[(exons["transcript_id"].isin(sub_transcript_id)) & (exons["start"]<=genome_start)]
+            exon_chrom = exons[(exons["transcript_id"].isin(sub_transcript_id)) & (exons["start"]<=genome_start)].copy()
         else:
             return None
         exon_chrom['next_start'] = exon_chrom['start'].shift(-1)
@@ -175,6 +188,7 @@ def genome_to_transcript_coords_skipintron(bam_file,read, exons, transcripts,out
                     print(f"Warning: {trans_id} coords_start {coords_start} > length {transcript_len}")
                     continue
                 trans_id = str(trans_id).strip()
+                remove_N_from_read(read)
                 out_bam.write(read)
 
     except ValueError as e:
