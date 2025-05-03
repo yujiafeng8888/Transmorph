@@ -21,8 +21,6 @@ From GitHub:
 
 ```bash
 pip install git+https://github.com/yujiafeng8888/Transmorph.git
-```python
-python3 main.py -g gtffile.gtf -i bamfile.bam -o output
 ```
 Or clone and install locally:
 
